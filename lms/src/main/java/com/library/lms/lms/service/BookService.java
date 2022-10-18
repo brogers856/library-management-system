@@ -33,6 +33,10 @@ public class BookService {
 		return bookRepository.findByAuthor(author);
 	}
 	
+	public List<Book> getBookByGenre(String genre) {
+		return bookRepository.findAllByGenre(genre);
+	}
+	
 	public List<Copy> getCopies(int id) {
 		Optional<Book> book = bookRepository.findById(id);
 		return List.copyOf(book.get().getCopy());

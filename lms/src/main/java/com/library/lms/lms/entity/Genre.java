@@ -3,10 +3,12 @@ package com.library.lms.lms.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,14 +16,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "book_genre")
 public class Genre implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@EmbeddedId
+	@JsonIgnore
+	private GenrePK id;
+
 	@Id
-	@Column(name = "genre")
+	@Column(name = "genre", nullable = false)
 	private String genre;
 	
-	@Id
 	@JsonIgnore
+	@MapsId("bookId")
 	@ManyToOne
-	@JoinColumn(name = "bookId", nullable = false)
+	@JoinColumn(name = "BookID", nullable = false)
 	private Book book;
 	
 	public Genre () {}
@@ -42,7 +54,13 @@ public class Genre implements Serializable {
 	public Book getBook() {
 		return book;
 	}
-	
-	
 
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public GenrePK getId() {
+		return id;
+	}
+	
 }

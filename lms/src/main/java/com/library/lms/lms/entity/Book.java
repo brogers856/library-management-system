@@ -10,27 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "Book")
 public class Book {
 	@Id
 	@GeneratedValue
-	@Column(name = "BookId")
+	@Column(name = "BookId", nullable = false)
 	private int bookId;
-	@Column(name = "Title")
+	@Column(name = "Title", nullable = false)
 	private String title;
-	@Column(name = "PubDate")
+	@Column(name = "PubDate", nullable = false)
 	private LocalDate pubDate;
-	@Column(name = "Author")
+	@Column(name = "Author", nullable = false)
 	private String author;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "book")
 	private Set<Copy> copy;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "book")
 	private Set<Genre> genre;
 	
