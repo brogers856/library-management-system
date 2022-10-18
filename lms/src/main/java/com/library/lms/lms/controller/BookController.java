@@ -3,10 +3,13 @@ package com.library.lms.lms.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.library.lms.lms.book.Book;
+import com.library.lms.lms.entity.Book;
+import com.library.lms.lms.entity.Copy;
+import com.library.lms.lms.entity.Genre;
 import com.library.lms.lms.service.BookService;
 
 @RestController
@@ -22,6 +25,21 @@ public class BookController {
 	@GetMapping
 	public List<Book> getBooks() {
 		return bookService.getBooks();
+	}
+	
+	@GetMapping("/{id}/genres")
+	List<Genre> getBookGenres(@PathVariable("id") int bookId) {
+		return bookService.getBookGenres(bookId);
+	}
+	
+	@GetMapping("/{author}")
+	public List<Book> getBookByAuthor(@PathVariable("author") String author) {
+		return bookService.getBookByAuthor(author);
+	}
+	
+	@GetMapping("/{id}/copies")
+	public List<Copy> getCopies(@PathVariable("id") String bookId) {
+		return bookService.getCopies(Integer.parseInt(bookId));
 	}
 }
 
