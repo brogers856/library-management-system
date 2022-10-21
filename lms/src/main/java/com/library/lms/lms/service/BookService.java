@@ -24,6 +24,10 @@ public class BookService {
 		return bookRepository.findAll();
 	}
 	
+	public Optional<Book> getBookById(int bookId) {
+		return bookRepository.findById(bookId);
+	}
+	
 	public List<Genre> getBookGenres(int bookId) {
 		Optional<Book> book = bookRepository.findById(bookId);
 		return List.copyOf(book.get().getGenre());
@@ -43,6 +47,14 @@ public class BookService {
 	}
 	
 	public void addBook(Book book) {
+		System.out.println(book);
+		Copy copy = book.getCopy().get(0);
+		copy.setBook(book);
+		System.out.println(book.getGenre().size());
+		for (Genre genre : book.getGenre()) {
+			genre.setBook(book);
+		}
 		bookRepository.save(book);
+
 	}
 }

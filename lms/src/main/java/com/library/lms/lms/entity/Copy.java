@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,19 +20,19 @@ public class Copy {
 
 	public enum Status {
 		@JsonProperty("Available")
-		AVAILABLE,
+		Available,
 		@JsonProperty("Loaned")
-		LOANED,
+		Loaned,
 		@JsonProperty("Damaged")
-		DAMAGED
+		Damaged
 	}
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CopyID", nullable = false)
 	private int copyId;
 	@Enumerated(EnumType.STRING)
-	@Column(name = "Status", nullable = false)
+	@Column(name = "Status", columnDefinition="ENUM('Available','Loaned', 'Damaged')", nullable = false)
 	private Status status;
 	
 	@JsonIgnore
@@ -47,6 +48,15 @@ public class Copy {
 		this.book = book;
 	}
 	
+	public Copy(Status status, Book book) {
+		this.status = status;
+		this.book = book;
+	}
+
+	public int getCopyId() {
+		return copyId;
+	}
+
 	public Status getStatus() {
 		return status;
 	}
@@ -55,12 +65,15 @@ public class Copy {
 		this.status = status;
 	}
 
-	public int getCopyId() {
-		return copyId;
-	}
-
 	public Book getBook() {
 		return book;
 	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+	
+	
+	
 
 }

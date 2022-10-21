@@ -3,9 +3,9 @@ package com.library.lms.lms.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -15,21 +15,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "book_genre")
+@IdClass(GenreID.class)
 public class Genre implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
-	@JsonIgnore
-	private GenrePK id;
-
+	
 	@Id
 	@Column(name = "genre", nullable = false)
 	private String genre;
-	
+
+	@Id
 	@JsonIgnore
 	@MapsId("bookId")
 	@ManyToOne
@@ -58,9 +56,6 @@ public class Genre implements Serializable {
 	public void setBook(Book book) {
 		this.book = book;
 	}
-
-	public GenrePK getId() {
-		return id;
-	}
+	
 	
 }

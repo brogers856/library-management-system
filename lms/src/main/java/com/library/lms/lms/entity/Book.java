@@ -1,11 +1,13 @@
 package com.library.lms.lms.entity;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "Book")
 public class Book {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BookId", nullable = false)
 	private int bookId;
 	@Column(name = "Title", nullable = false)
@@ -24,11 +26,11 @@ public class Book {
 	@Column(name = "Author", nullable = false)
 	private String author;
 	
-	@OneToMany(mappedBy = "book")
-	private Set<Copy> copy;
+	@OneToMany(mappedBy = "book", cascade = CascadeType.PERSIST)
+	private List<Copy> copy;
 	
-	@OneToMany(mappedBy = "book")
-	private Set<Genre> genre;
+	@OneToMany(mappedBy = "book", cascade = CascadeType.PERSIST)
+	private List<Genre> genre;
 	
 	public Book () {}
 	
@@ -44,7 +46,11 @@ public class Book {
 		this.pubDate = pubDate;
 		this.author = author;
 	}
-	
+
+	public int getBookId() {
+		return bookId;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -69,27 +75,21 @@ public class Book {
 		this.author = author;
 	}
 
-	public int getId() {
-		return bookId;
-	}
-
-	public Set<Copy> getCopy() {
+	public List<Copy> getCopy() {
 		return copy;
 	}
 
-	public void setCopy(Set<Copy> copy) {
+	public void setCopy(List<Copy> copy) {
 		this.copy = copy;
 	}
 
-	public Set<Genre> getGenre() {
+	public List<Genre> getGenre() {
 		return genre;
 	}
 
-	public void setGenre(Set<Genre> genre) {
+	public void setGenre(List<Genre> genre) {
 		this.genre = genre;
 	}
-	
-	
 	
 	
 }

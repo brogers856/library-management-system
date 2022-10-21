@@ -1,6 +1,7 @@
 package com.library.lms.lms.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -18,5 +19,9 @@ public class CustomerService {
 	
 	public List<Customer> getCustomers() {
 		return customerRepository.findAll();
+	}
+	
+	public Optional<Customer> getCustomerById(int customerId) {
+		return customerRepository.findById(customerId);
 	}
 }
