@@ -1,6 +1,6 @@
 package com.library.lms.lms.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ public class Customer {
 	@Column(name = "Last", nullable = false)
 	private String last;
 	@Column(name = "JoinDate", nullable = false)
-	private LocalDateTime joinDate;
+	private LocalDate joinDate;
 	
 	@OneToMany(mappedBy = "customer")
 	private Set<Loan> loan;
@@ -35,13 +35,13 @@ public class Customer {
 		this.customerId = id;
 		this.first = first;
 		this.last = last;
-		this.joinDate = LocalDateTime.now();
+		this.joinDate = LocalDate.now();
 	}
 	
 	public Customer (String first, String last) {
 		this.first = first;
 		this.last = last;
-		this.joinDate = LocalDateTime.now();
+		this.joinDate = LocalDate.now();
 	}
 
 	public String getFirst() {
@@ -60,11 +60,11 @@ public class Customer {
 		this.last = last;
 	}
 
-	public LocalDateTime getJoinDate() {
+	public LocalDate getJoinDate() {
 		return joinDate;
 	}
 
-	public void setJoinDate(LocalDateTime joinDate) {
+	public void setJoinDate(LocalDate joinDate) {
 		this.joinDate = joinDate;
 	}
 

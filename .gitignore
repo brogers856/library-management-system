@@ -33,7 +33,7 @@ build/
 .vscode/
 
 ### Spring Boot ###
-lms/src/main/resources/application.properties
+/lms/src/main/resources/application.properties
 
 ### CodeMR ###
 lms/codemr

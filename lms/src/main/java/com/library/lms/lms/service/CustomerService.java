@@ -24,4 +24,8 @@ public class CustomerService {
 	public Optional<Customer> getCustomerById(int customerId) {
 		return customerRepository.findById(customerId);
 	}
+	
+	public void addCustomer(Customer customer) {
+		customerRepository.save(customer);
+	}
 }
